@@ -240,7 +240,7 @@ body.reveal .draw{
 }
 @keyframes drawIn{ to{ stroke-dashoffset: 0; } }
 
-/* bloom — aparece depois do caule (pra não “voar”) */
+/* bloom — aparece depois do caule */
 .flowerBloom{
   opacity:0;
   transform: translateY(14px) scale(.84);
@@ -249,7 +249,7 @@ body.reveal .draw{
 }
 body.reveal .flowerBloom{
   animation: bloomIn 2.0s var(--ease) forwards;
-  animation-delay: 1.3s;
+  animation-delay: 3.1s;
 }
 @keyframes bloomIn{
   0%{ opacity:0; transform: translateY(14px) scale(.84); }
@@ -268,6 +268,79 @@ body.idle .sway.fast{ animation: sway 5.9s ease-in-out infinite alternate; }
 @keyframes sway{
   from{ transform: rotate(-2deg); }
   to{ transform: rotate(2.8deg); }
+}
+
+/* ===== Love note (frase + coração) ===== */
+.loveNote{
+  position:absolute;
+  left:50%;
+  bottom: clamp(26px, 6vh, 60px);
+  transform: translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,11,28,.30);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  opacity:0;
+  pointer-events:none;
+}
+
+.loveHeart{
+  font-size: 18px;
+  color: rgba(255,80,140,.95);
+  text-shadow: 0 0 16px rgba(255,80,140,.22), 0 0 18px rgba(217,70,239,.18);
+  animation: pulseHeart 1.6s ease-in-out infinite;
+}
+
+.loveText{
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(22px, 2.6vw, 34px);
+  color: rgba(255,255,255,.98);
+  text-shadow: 0 0 16px rgba(217,70,239,.14);
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+
+@keyframes pulseHeart{
+  0%,100%{ transform: scale(1); }
+  50%{ transform: scale(1.12); }
+}
+
+body.is-open .loveNote{
+  opacity:1;
+  transition: opacity 900ms var(--ease);
+}
+
+/* ===== botão de som discreto ===== */
+.soundToggle{
+  position:absolute;
+  right: 18px;
+  bottom: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(10,11,28,.35);
+  color: rgba(255,255,255,.90);
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+body.is-open .soundToggle{
+  opacity:1;
+  transform: translateY(0);
+}
+.soundToggle:hover{
+  border-color: rgba(255,255,255,.22);
 }
 
 @media (prefers-reduced-motion: reduce){

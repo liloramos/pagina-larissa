@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#070812" />
-  <title>Eu te amo</title>
+  <title>Para minha Larissa</title>
   <link rel="stylesheet" href="./styles.css" />
   <link rel="icon" href="./coracao.png" type="image/png">
 </head>
@@ -301,7 +301,7 @@
 
             <g filter="url(#soft)">
 
-              <!-- ✅ TOP CENTER CORRIGIDO: caule + mini-caule e flor ancorada -->
+              <!-- ✅ TOP CENTER: caule + mini-caule + flor ancorada (não voa) -->
               <g class="sway slow">
                 <g filter="url(#glowGreen)">
                   <path class="draw stem" style="--d:0s" stroke="url(#stemG)" stroke-width="11"
@@ -464,10 +464,24 @@
             </g>
           </svg>
         </div>
+
+        <!-- ✅ Frase + coração ao lado do buquê -->
+        <div class="loveNote" aria-hidden="true">
+          <span class="loveHeart" aria-hidden="true">❤</span>
+          <span class="loveText">Eu te amo tanto meu amor</span>
+        </div>
+
+        <!-- ✅ Botão de som -->
+        <button class="soundToggle" id="soundToggle" type="button" aria-label="Som">
+          <span id="soundIcon">🔊</span>
+        </button>
       </div>
 
     </section>
   </main>
+
+  <!-- ✅ Música (troque o arquivo depois quando quiser) -->
+  <audio id="bgm" src="./The Police.mp3" preload="auto" loop></audio>
 
   <script src="./app.js"></script>
 </body>

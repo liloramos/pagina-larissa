@@ -60,6 +60,7 @@
     makeHearts();
   }, { passive:true });
 
+  // Stroke draw lengths
   function setupDraw(){
     document.querySelectorAll("path.draw").forEach(p => {
       try{
@@ -71,6 +72,40 @@
     });
   }
 
+  // Audio
+  const bgm = document.getElementById("bgm");
+  const soundToggle = document.getElementById("soundToggle");
+  const soundIcon = document.getElementById("soundIcon");
+
+  function setSoundUI(){
+    if(!bgm || !soundIcon) return;
+    soundIcon.textContent = bgm.muted ? "🔇" : "🔊";
+  }
+
+  function tryPlayMusic(){
+    if(!bgm) return;
+    bgm.volume = 0.7;
+    bgm.muted = false;
+    setSoundUI();
+    const p = bgm.play();
+    if(p && typeof p.catch === "function"){
+      p.catch(() => {});
+    }
+  }
+
+  if(soundToggle && bgm){
+    soundToggle.addEventListener("click", () => {
+      bgm.muted = !bgm.muted;
+      setSoundUI();
+      if(!bgm.muted){
+        const p = bgm.play();
+        if(p?.catch) p.catch(()=>{});
+      }
+    });
+    setSoundUI();
+  }
+
+  // Envelope / Bouquet logic
   const envelope = document.getElementById("envelope");
   const bouquet = document.getElementById("bouquet");
   let timer = null;
@@ -93,6 +128,9 @@
     startReveal();
     makeFlies(prefersReduced ? 12 : 22);
     makeHearts(prefersReduced ? 0 : 7);
+
+    // toca a música ao abrir (interação do usuário)
+    tryPlayMusic();
   }
 
   function replay(){
