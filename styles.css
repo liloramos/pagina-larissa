@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600&display=swap');
+
+:root{
+  --bg0:#050611;
+  --bg1:#0a0b1c;
+  --ink:#eef0ff;
+  --stroke:rgba(255,255,255,.10);
+  --shadow:0 18px 60px rgba(0,0,0,.55);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 680px at 12% 10%, rgba(168,85,247,.26), transparent 62%),
+    radial-gradient(980px 600px at 88% 22%, rgba(34,211,238,.12), transparent 60%),
+    radial-gradient(1000px 760px at 50% 92%, rgba(255,42,109,.10), transparent 65%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+  overflow:hidden;
+}
+
+.top{
+  position:fixed;
+  top:12px;
+  left:0; right:0;
+  display:flex;
+  justify-content:center;
+  z-index:10;
+  pointer-events:none;
+}
+.top h1{
+  margin:0;
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(10,11,28,.40);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  font-family:"Great Vibes", cursive;
+  font-size: 28px;
+  letter-spacing:.4px;
+  color: rgba(255,255,255,.98);
+  text-shadow:
+    0 0 12px rgba(217,70,239,.22),
+    0 0 18px rgba(34,211,238,.12);
+  opacity:.98;
+}
+
+.wrap{
+  height:100%;
+  display:grid;
+  place-items:center;
+  padding: clamp(12px, 3vw, 24px);
+}
+
+.stars{
+  position:fixed; inset:0;
+  pointer-events:none;
+  opacity:.55;
+  background-image:
+    radial-gradient(circle at 12% 24%, rgba(255,255,255,.12) 0 1px, transparent 2px),
+    radial-gradient(circle at 40% 18%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+    radial-gradient(circle at 75% 26%, rgba(255,255,255,.10) 0 1px, transparent 2px),
+    radial-gradient(circle at 62% 60%, rgba(255,255,255,.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 22% 72%, rgba(255,255,255,.08) 0 1px, transparent 2px);
+}
+
+/* fireflies */
+.fireflies{ position:fixed; inset:0; pointer-events:none; z-index:2; }
+.fly{
+  position:absolute;
+  width:6px; height:6px;
+  border-radius:999px;
+  background: radial-gradient(circle at 35% 35%, #fff, #ffd166 45%, rgba(255,209,102,0) 72%);
+  box-shadow: 0 0 14px rgba(255,209,102,.35);
+  opacity:.85;
+  animation: drift var(--dur,8s) ease-in-out infinite;
+  transform: translate3d(var(--x1), var(--y1), 0);
+}
+@keyframes drift{
+  0%{ transform: translate3d(var(--x1), var(--y1), 0) scale(.9); opacity:.55; }
+  50%{ transform: translate3d(var(--x2), var(--y2), 0) scale(1.15); opacity:1; }
+  100%{ transform: translate3d(var(--x3), var(--y3), 0) scale(.95); opacity:.6; }
+}
+
+/* hearts (poucos e discretos) */
+.hearts{ position:fixed; inset:0; pointer-events:none; z-index:1; }
+.heart{
+  position:absolute;
+  width:10px; height:10px;
+  transform: rotate(45deg);
+  opacity:.22;
+  background: linear-gradient(135deg, rgba(255,80,140,.9), rgba(217,70,239,.75));
+  box-shadow: 0 0 10px rgba(255,80,140,.18);
+  animation: floatUp var(--dur,16s) linear infinite;
+}
+.heart::before,
+.heart::after{
+  content:"";
+  position:absolute;
+  width:10px; height:10px;
+  border-radius:50%;
+  background: inherit;
+}
+.heart::before{ left:-5px; top:0; }
+.heart::after{ left:0; top:-5px; }
+
+@keyframes floatUp{
+  0%   { transform: translate3d(var(--x), var(--y), 0) rotate(45deg) scale(.9); opacity: 0; }
+  10%  { opacity: .22; }
+  90%  { opacity: .18; }
+  100% { transform: translate3d(calc(var(--x) + var(--dx)), -120px, 0) rotate(45deg) scale(1.05); opacity: 0; }
+}
+
+.stage{
+  width: min(1200px, 96vw);
+  height: min(760px, 88vh);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(10,11,28,.56);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  position:relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* envelope */
+.envelope{
+  position:absolute;
+  inset:0;
+  margin:auto;
+  width:min(420px, 78vw);
+  height:min(300px, 46vh);
+  border-radius:22px;
+  border:1px solid var(--stroke);
+  background: rgba(10,11,28,.62);
+  box-shadow: var(--shadow);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition: transform 500ms var(--ease), opacity 500ms var(--ease);
+}
+.envelope:hover{ transform: translateY(-3px); }
+
+.envGlow{
+  position:absolute; inset:-3px;
+  border-radius:24px;
+  background: linear-gradient(135deg, rgba(34,211,238,.30), rgba(168,85,247,.26), rgba(255,42,109,.22));
+  filter: blur(18px);
+  opacity:.22;
+  z-index:-1;
+}
+.envIcon{ width:min(240px, 56%); height:auto; opacity:.95; }
+
+/* selo rosa com “abra” */
+.seal{
+  position:absolute;
+  bottom:16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  width:70px; height:70px;
+  border-radius:999px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), rgba(255,255,255,.06) 28%, transparent 62%),
+    radial-gradient(circle at 35% 35%, rgba(255,80,140,.95), rgba(217,70,239,.88) 55%, rgba(124,58,237,.88));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 0 22px rgba(255,80,140,.20), 0 14px 40px rgba(0,0,0,.45);
+  pointer-events:none;
+}
+.sealHeart{
+  font-size:22px;
+  line-height:1;
+  color: rgba(255,255,255,.96);
+  text-shadow: 0 0 12px rgba(255,80,140,.25);
+}
+.sealText{
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,.86);
+  transform: translateY(-1px);
+}
+
+/* bouquet */
+.bouquet{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  opacity:0;
+  transform: scale(.995);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  pointer-events:none;
+}
+body.is-open .envelope{ opacity:0; transform: scale(.98); pointer-events:none; }
+body.is-open .bouquet{ opacity:1; transform: scale(1); pointer-events:auto; }
+
+.art{
+  position:absolute;
+  inset:0;
+  padding:0;
+  border-radius: 28px;
+  overflow:hidden;
+}
+.svg{ width:100%; height:100%; display:block; }
+
+/* SVG twinkle */
+.tw{
+  animation: twinkle 3.6s ease-in-out infinite;
+  animation-delay: var(--t, 0s);
+}
+@keyframes twinkle{
+  0%,100%{ opacity:.35; transform: scale(1); }
+  50%{ opacity:.75; transform: scale(1.08); }
+}
+
+/* draw (stems) — mais rápido */
+.draw{
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity:.98;
+}
+body.reveal .draw{
+  animation: drawIn 2.2s var(--ease) forwards;
+  animation-delay: var(--d, 0s);
+}
+@keyframes drawIn{ to{ stroke-dashoffset: 0; } }
+
+/* bloom — aparece depois do caule (pra não “voar”) */
+.flowerBloom{
+  opacity:0;
+  transform: translateY(14px) scale(.84);
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+}
+body.reveal .flowerBloom{
+  animation: bloomIn 2.0s var(--ease) forwards;
+  animation-delay: 1.3s;
+}
+@keyframes bloomIn{
+  0%{ opacity:0; transform: translateY(14px) scale(.84); }
+  70%{ opacity:1; transform: translateY(0) scale(1.02); }
+  100%{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* idle sway */
+.sway{
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+body.idle .sway.slow{ animation: sway 7.8s ease-in-out infinite alternate; }
+body.idle .sway.med { animation: sway 6.6s ease-in-out infinite alternate; }
+body.idle .sway.fast{ animation: sway 5.9s ease-in-out infinite alternate; }
+@keyframes sway{
+  from{ transform: rotate(-2deg); }
+  to{ transform: rotate(2.8deg); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}
