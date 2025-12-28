@@ -249,7 +249,7 @@ body.reveal .draw{
 }
 body.reveal .flowerBloom{
   animation: bloomIn 2.0s var(--ease) forwards;
-  animation-delay: 3.1s;
+  animation-delay: 1.2s;
 }
 @keyframes bloomIn{
   0%{ opacity:0; transform: translateY(14px) scale(.84); }
